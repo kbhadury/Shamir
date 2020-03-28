@@ -28,7 +28,7 @@ def get_input():
     return (plaintext, num_keys)
     
 def generate_keys(plaintext, num_keys):
-    secret_number = string_to_num(plaintext)        
+    secret_number = str_to_num(plaintext)        
     secret_x = get_rand_num(10)
     secret_y = get_rand_num(10)
     rise = secret_y - secret_number
@@ -38,7 +38,7 @@ def generate_keys(plaintext, num_keys):
     for i in range(num_keys):
         secret_x += run
         secret_y += rise
-        keys.append(b64_encode(secret_x, secret_y))
+        keys.append(b64_encode_coords(secret_x, secret_y))
         
     return keys
     
@@ -46,9 +46,9 @@ def print_output(keys):
     for index, key in enumerate(keys, start = 1):
         print("Key #" + str(index) + ": " + key)
     
-def string_to_num(text):
+def str_to_num(string):
     secret_number = 0
-    for char in text:
+    for char in string:
         ascii_val = ord(char)
         secret_number = (secret_number << 8) | ascii_val
         
@@ -58,9 +58,11 @@ def get_rand_num(num_digits):
     num_str = ''.join(secrets.choice(string.digits) for i in range(num_digits))
     return int(num_str)
     
-def b64_encode(x, y):
+def b64_encode_coords(x, y):
     coords = str(x) + "," + str(y)
-    return base64.b64encode(coords.encode()).decode()
+    input_bytes = coords.encode()
+    output_bytes =  base64.b64encode(input_bytes)
+    return output_bytes.decode()
     
 def is_printable_ascii(string):
     for char in string:
