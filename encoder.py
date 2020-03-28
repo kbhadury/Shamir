@@ -17,13 +17,16 @@ def print_instructions():
     print("*" * 40)
     
 def get_input():
-    plaintext = '\n'
-    while not is_printable_ascii(plaintext):
+    plaintext = ''
+    while len(plaintext) == 0 or not is_printable_ascii(plaintext):
         plaintext = input("Enter the secret to encode (printable ASCII characters only): ")
         
     num_keys = -1
     while num_keys < 2:
-        num_keys = int(input("Enter the number of keys to generate (at least 2): "))
+        in_str = input("Enter the number of keys to generate (at least 2): ")
+        if not in_str.isnumeric():
+            continue
+        num_keys = int(in_str)
         
     return (plaintext, num_keys)
     
