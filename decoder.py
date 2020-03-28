@@ -31,16 +31,18 @@ def get_message(key_1, key_2):
     x_1, y_1 = b64_decode_coords(key_1)
     x_2, y_2 = b64_decode_coords(key_2)
     
-    slope = (y_2 - y_1) // (x_2 - x_1)
-    secret_num = -1*slope*x_1 + y_1
-    
-    return num_to_str(secret_num)
+    rise = y_2 - y_1
+    run = x_2 - x_1
+    while x_1 != 0:
+        x_1 -= run
+        y_1 -= rise
+        
+    return num_to_str(y_1)
     
 def num_to_str(num):
     string = ""
     while num != 0:
         ascii_val = num & 0xFF
-        print(ascii_val)
         char = chr(ascii_val)
         string = char + string
         num = num >> 8
@@ -62,7 +64,7 @@ def b64_decode_coords(b64_str):
     return (coords[0], coords[1])
     
 def is_base64(string):
-    pattern = "\A[a-zA-Z0-9+/]+\Z"
+    pattern = "\A[a-zA-Z0-9+/=]+\Z"
     result = re.match(pattern, string)
     return (result is not None)
     

@@ -13,7 +13,7 @@ def print_instructions():
     print("This program allows you to encrypt a")
     print("secret message.  To decrypt it, two keys")
     print("are required.  You can generate as many")
-    print("keys as you want to share")
+    print("keys as you want to share.")
     print("*" * 40)
     
 def get_input():
@@ -54,7 +54,7 @@ def str_to_num(string):
     for char in string:
         ascii_val = ord(char)
         secret_number = (secret_number << 8) | ascii_val
-        
+      
     return secret_number
     
 def get_rand_num(num_digits):
