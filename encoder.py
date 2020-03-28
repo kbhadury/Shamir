@@ -36,9 +36,9 @@ def generate_keys(plaintext, num_keys):
     
     keys = []
     for i in range(num_keys):
-        keys.append(b64_encode(secret_x, secret_y))
         secret_x += run
         secret_y += rise
+        keys.append(b64_encode(secret_x, secret_y))
         
     return keys
     
