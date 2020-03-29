@@ -32,16 +32,13 @@ def get_input():
     
 def generate_keys(plaintext, num_keys):
     secret_number = str_to_num(plaintext)        
-    secret_x = get_rand_num(10)
-    secret_y = get_rand_num(10)
-    rise = secret_y - secret_number
-    run = secret_x
+    slope = get_rand_num(20)
     
     keys = []
     for i in range(num_keys):
-        secret_x += run
-        secret_y += rise
-        keys.append(b64_encode_coords(secret_x, secret_y))
+        x_pos = i + 1
+        key_val = secret_number + slope*x_pos
+        keys.append(b64_encode_key(x_pos, key_val))
         
     return keys
     
@@ -61,9 +58,9 @@ def get_rand_num(num_digits):
     num_str = ''.join(secrets.choice(string.digits) for i in range(num_digits))
     return int(num_str)
     
-def b64_encode_coords(x, y):
-    coords = str(x) + "," + str(y)
-    input_bytes = coords.encode()
+def b64_encode_key(x_pos, key_val):
+    key = str(x_pos) + "," + str(key_val)
+    input_bytes = key.encode()
     output_bytes =  base64.b64encode(input_bytes)
     return output_bytes.decode()
     
