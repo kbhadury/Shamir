@@ -5,14 +5,18 @@ def main():
     print_instructions()
     key_1, key_2 = get_input()
     message = get_message(key_1, key_2)
-    print("Decrypted message: " + message)
+    print("\nDecrypted message: " + message)
     
 def print_instructions():
-    print("*" * 40)
-    print("This program allows you to decrypt a")
-    print("secret message.  You must have two")
-    print("keys associated with the secret.")
-    print("*" * 40)
+    instrs = """
+****************************************
+This program allows you to decrypt a
+secret message that was encrypted using
+encrypt.py.  You must have two keys
+associated with the secret.
+****************************************
+"""
+    print(instrs)
     
 def get_input():
     key_1 = input("Enter the first key: ").strip()

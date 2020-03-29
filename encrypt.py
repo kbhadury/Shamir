@@ -9,12 +9,15 @@ def main():
     print_output(keys)
     
 def print_instructions():
-    print("*" * 40)
-    print("This program allows you to encrypt a")
-    print("secret message.  To decrypt it, two keys")
-    print("are required.  You can generate as many")
-    print("keys as you want to share.")
-    print("*" * 40)
+    instrs = """
+****************************************
+This program allows you to encrypt a    
+secret message.  To decrypt it, two keys
+must be provided to decrypt.py.  You can
+generate as many keys as you want.
+****************************************
+"""
+    print(instrs)
     
 def get_input():
     plaintext = ''
@@ -43,8 +46,18 @@ def generate_keys(plaintext, num_keys):
     return keys
     
 def print_output(keys):
+    print("\nResult:")
     for index, key in enumerate(keys, start = 1):
         print("Key #" + str(index) + ": " + key)
+    
+    footnote = """
+Remember, any two of these keys can be used to decrypt your secret message.
+However, this means you can hand out one key to each person and they won't
+be able to decrypt your message without knowing someone else's key.    
+
+These keys must be kept private by their owners.
+"""
+    print(footnote)
     
 def str_to_num(string):
     secret_number = 0
