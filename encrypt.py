@@ -18,12 +18,12 @@ def print_instructions():
     
 def get_input():
     plaintext = ''
-    while len(plaintext) == 0 or not is_printable_ascii(plaintext):
+    while len(plaintext) == 0 or not is_printable_ascii_str(plaintext):
         plaintext = input("Enter the secret to encode (printable ASCII characters only): ")
         
     num_keys = -1
     while num_keys < 2:
-        in_str = input("Enter the number of keys to generate (at least 2): ")
+        in_str = input("Enter the number of keys to generate (at least 2): ").strip()
         if not in_str.isnumeric():
             continue
         num_keys = int(in_str)
@@ -64,7 +64,7 @@ def b64_encode_key(x_pos, key_val):
     output_bytes =  base64.b64encode(input_bytes)
     return output_bytes.decode()
     
-def is_printable_ascii(string):
+def is_printable_ascii_str(string):
     for char in string:
         ascii_val = ord(char)
         if ascii_val > 127 or ascii_val < 32:
