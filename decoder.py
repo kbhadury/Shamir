@@ -28,16 +28,16 @@ def get_input():
     return (key_1, key_2)
     
 def get_message(key_1, key_2):
-    x_1, y_1 = b64_decode_coords(key_1)
-    x_2, y_2 = b64_decode_coords(key_2)
+    x_1, y_1 = b64_decode_key(key_1)
+    x_2, y_2 = b64_decode_key(key_2)
     
-    rise = y_2 - y_1
-    run = x_2 - x_1
-    while x_1 != 0:
-        x_1 -= run
-        y_1 -= rise
-        
-    return num_to_str(y_1)
+    secret_num = solve_for_intercept(x_1, y_1, x_2, y_2)
+    return num_to_str(secret_num)
+    
+def solve_for_intercept(x_1, y_1, x_2, y_2):
+    slope = (y_2 - y_1) // (x_2 - x_1)
+    intercept = y_1 - slope*x_1
+    return intercept
     
 def num_to_str(num):
     string = ""
@@ -49,7 +49,7 @@ def num_to_str(num):
         
     return string
 
-def b64_decode_coords(b64_str):
+def b64_decode_key(b64_str):
     input_bytes = b64_str.encode()
     output_bytes = ''
     try:
@@ -58,10 +58,9 @@ def b64_decode_coords(b64_str):
         print("The key '" + b64_str + "' is malformed.  Please double check that you typed it correctly.")
         exit()
         
-    coords_str = output_bytes.decode()
-    coords_strs = coords_str.split(',')
-    coords = [int(coord_str) for coord_str in coords_strs]
-    return (coords[0], coords[1])
+    key = output_bytes.decode()
+    vals = [int(val) for val in key.split(',')]
+    return (vals[0], vals[1])
     
 def is_base64(string):
     pattern = "\A[a-zA-Z0-9+/=]+\Z"
