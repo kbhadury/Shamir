@@ -1,5 +1,6 @@
-import base64
-import re
+import char_ops
+import constants
+import user_input_manager as uim
 
 def main():
     print_instructions()
@@ -8,35 +9,30 @@ def main():
     print("\nDecrypted message: " + message)
     
 def print_instructions():
-    instrs = """
-****************************************
-This program allows you to decrypt a
-secret message that was encrypted using
-encrypt.py.  You must have two keys
-associated with the secret.
-****************************************
-"""
-    print(instrs)
+    print(constants.DECRYPTION_INSTRUCTIONS)
     
 def get_input():
-    key_1 = input("Enter the first key: ").strip()
-    while not is_base64(key_1):
-        print("Error: key can only contain letters, numbers, +, /, and =")
-        key_1 = input("Enter the first key: ").strip()
-        
-    key_2 = input("Enter the second key: ").strip()
-    while not is_base64(key_2):
-        print("Error: key can only contain letters, numbers, +, /, and =")
-        key_2 = input("Enter the second key: ").strip()
-        
+    key_1 = uim.get_base64_input("Enter the first key: ")
+    key_2 = uim.get_base64_input("Enter the second key: ")
     return (key_1, key_2)
     
 def get_message(key_1, key_2):
-    x_1, y_1 = b64_decode_key(key_1)
-    x_2, y_2 = b64_decode_key(key_2)
+    key_1_coords = None
+    key_2_coords = None
+    try:
+        key_1_coords = char_ops.base64_decode(key_1)
+        key_2_coords = char_ops.base64_decode(key_2)
+    except:
+        error_and_quit()
+    
+    x_1, y_1 = extract_x_y(key_1_coords)
+    x_2, y_2 = extract_x_y(key_2_coords)
     
     secret_num = solve_for_intercept(x_1, y_1, x_2, y_2)
-    return num_to_str(secret_num)
+    try:
+        return char_ops.num_to_str(secret_num)
+    except:
+        error_and_quit()
     
 def solve_for_intercept(x_1, y_1, x_2, y_2):
     slope = None
@@ -48,45 +44,14 @@ def solve_for_intercept(x_1, y_1, x_2, y_2):
     intercept = y_1 - slope*x_1
     return intercept
     
-def num_to_str(num):
-    string = ""
-    while num != 0:
-        ascii_val = num & 0xFF
-        if not is_printable_ascii_val(ascii_val):
-            error_and_quit()
-            
-        char = chr(ascii_val)
-        string = char + string
-        num = num >> 8
-        
-    return string
-
-def b64_decode_key(b64_str):
-    input_bytes = b64_str.encode()
-    output_bytes = None
-    try:
-        output_bytes =  base64.b64decode(input_bytes)
-        key = output_bytes.decode()
-    except:
+def extract_x_y(coord_pair):
+    coords = coord_pair.split(',')
+    if len(coords) != 2:
         error_and_quit()
-    
-    vals = key.split(',')
-    if len(vals) != 2:
-        error_and_quit()
-        
-    vals = [int(val) for val in vals]
-    return (vals[0], vals[1])
-    
-def is_base64(string):
-    pattern = "\A[a-zA-Z0-9+/=]+\Z"
-    result = re.match(pattern, string)
-    return (result is not None)
-    
-def is_printable_ascii_val(ascii_val):
-    return (ascii_val <= 127 and ascii_val >= 32)
+    return (int(coords[0]), int(coords[1]))
     
 def error_and_quit():
-    print("Error: message could not be decrypted.  Please double check that you entered the keys correctly.")
+    print(constants.DECRYPTION_ERROR_MESSAGE)
     exit()
     
 main()
