@@ -24,6 +24,6 @@ associated with the secret.
 ****************************************
 """
 
-DECRYPTION_ERROR_MESSAGE = "Error: message could not be decrypted.  Please double check that you entered the keys correctly."
+DECRYPTION_ERROR_MESSAGE = "Error: message could not be decrypted."
 
 NUM_SLOPE_DIGITS = 20
