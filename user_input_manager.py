@@ -7,7 +7,7 @@ def get_printable_ascii_string(msg):
         
     return user_input
     
-def get_int_gt(msg, min_val):
+def get_int_at_least(min_val, msg):
     user_input = min_val - 1
     while user_input < min_val:
         in_str = input(msg).strip()

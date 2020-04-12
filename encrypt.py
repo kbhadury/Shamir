@@ -16,7 +16,7 @@ def print_instructions():
     
 def get_input():
     plaintext = uim.get_printable_ascii_string("Enter the secret to encode (printable ASCII characters only): ")
-    num_keys = uim.get_int_gt("Enter the number of keys to generate (at least 2): ", 2)
+    num_keys = uim.get_int_at_least(2, "Enter the number of keys to generate (at least 2): ")
     return (plaintext, num_keys)
     
 def generate_keys(plaintext, num_keys):
