@@ -1,4 +1,4 @@
-import char_ops
+import data_ops
 
 def get_printable_ascii_string(msg):
     user_input = ''
@@ -19,7 +19,7 @@ def get_int_at_least(min_val, msg):
     
 def get_base64_input(msg):
     user_input = input(msg).strip()
-    while not char_ops.is_base64(user_input):
+    while not data_ops.is_base64(user_input):
         print("Error: input can only contain letters, numbers, +, /, and =")
         user_input = input(msg).strip()
         

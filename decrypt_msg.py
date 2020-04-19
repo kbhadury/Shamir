@@ -1,4 +1,4 @@
-import char_ops
+import data_ops
 import constants
 import user_input_manager as uim
 
@@ -20,8 +20,8 @@ def get_message(key_1, key_2):
     key_1_coords = None
     key_2_coords = None
     try:
-        key_1_coords = char_ops.base64_decode(key_1)
-        key_2_coords = char_ops.base64_decode(key_2)
+        key_1_coords = data_ops.base64_decode(key_1)
+        key_2_coords = data_ops.base64_decode(key_2)
     except:
         error_and_quit("Please double check that you entered the keys correctly.")
     
@@ -30,7 +30,7 @@ def get_message(key_1, key_2):
     
     secret_num = solve_for_intercept(x_1, y_1, x_2, y_2)
     try:
-        return char_ops.num_to_str(secret_num)
+        return data_ops.num_to_str(secret_num)
     except:
         error_and_quit("Please double check that you entered the keys correctly.")
         

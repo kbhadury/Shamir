@@ -1,4 +1,4 @@
-import char_ops
+import data_ops
 import constants
 import user_input_manager as uim
 
@@ -20,7 +20,7 @@ def get_input():
     return (plaintext, num_keys)
     
 def generate_keys(plaintext, num_keys):
-    secret_number = char_ops.str_to_num(plaintext)        
+    secret_number = data_ops.str_to_num(plaintext)        
     slope = get_rand_num(constants.NUM_SLOPE_DIGITS)
     
     keys = []
@@ -28,7 +28,7 @@ def generate_keys(plaintext, num_keys):
         x_pos = i + 1
         key_val = secret_number + slope*x_pos
         key = str(x_pos) + ',' + str(key_val)
-        keys.append(char_ops.base64_encode(key))
+        keys.append(data_ops.base64_encode(key))
         
     return keys
     
