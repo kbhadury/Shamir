@@ -14,10 +14,10 @@ def num_to_str(num):
     string = ""
     while num != 0:
         ascii_val = num & 0xFF
-        if not chr(ascii_val).isprintable():
+        char = chr(ascii_val)
+        if not char.isprintable():
             raise ValueError
             
-        char = chr(ascii_val)
         string = char + string
         num = num >> 8
         
@@ -34,7 +34,6 @@ def base64_decode(b64_str):
     output_bytes =  base64.b64decode(input_bytes)
     return output_bytes.decode()
     
-# ***** Validators ***** #    
 def is_base64(string):
     pattern = "\A[a-zA-Z0-9+/=]+\Z"
     result = re.match(pattern, string)

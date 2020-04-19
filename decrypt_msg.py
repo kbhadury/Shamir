@@ -6,7 +6,7 @@ def main():
     print_instructions()
     key_1, key_2 = get_input()
     message = get_message(key_1, key_2)
-    print("\nDecrypted message: " + message)
+    print_output(message)
     
 def print_instructions():
     print(constants.DECRYPTION_INSTRUCTIONS)
@@ -33,6 +33,9 @@ def get_message(key_1, key_2):
         return char_ops.num_to_str(secret_num)
     except:
         error_and_quit("Please double check that you entered the keys correctly.")
+        
+def print_output(message):
+    print("\nDecrypted message: " + message)
     
 def solve_for_intercept(x_1, y_1, x_2, y_2):
     slope = None
@@ -55,5 +58,3 @@ def error_and_quit(extra_msg = None):
     if extra_msg is not None:
         print(extra_msg)
     exit()
-    
-main()

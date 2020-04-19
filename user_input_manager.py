@@ -25,3 +25,23 @@ def get_base64_input(msg):
         
     return user_input
     
+def get_int_choice_from(options, msg):
+    user_input = None
+    while not (user_input in options):
+        user_input = input(msg).strip()
+        if not user_input.isnumeric():
+            continue
+        user_input = int(user_input)
+        
+    return user_input
+    
+def get_menu_str(options, hlength):
+    menu_str = ""
+    for index, option in enumerate(options):
+        index_str = str(index)
+        spacer_len = hlength - (len(option) + len(index_str))
+        row_str = option + ('.' * spacer_len) + index_str
+        menu_str += row_str + '\n'
+        
+    return menu_str
+    

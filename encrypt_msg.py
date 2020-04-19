@@ -43,5 +43,3 @@ def get_rand_num(num_digits):
     num_str = ''.join(secrets.choice(string.digits) for i in range(num_digits))
     return int(num_str)
     
-main()
-    

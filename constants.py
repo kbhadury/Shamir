@@ -1,3 +1,18 @@
+MAIN_MENU_HEADER = """
+****************************************
+            Select an option
+Encrypt a message......................1
+Decrypt a message......................2
+Encrypt a file.........................3
+Decrypt a file.........................4
+Modify an encrypted file...............5
+Exit...................................0
+"""
+
+MAIN_MENU_FOOTER = """
+****************************************
+"""
+
 ENCRYPTION_INSTRUCTIONS = """
 ****************************************
 This program allows you to encrypt a    
