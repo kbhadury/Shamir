@@ -22,7 +22,7 @@ def generate_keys(plaintext, num_keys):
     return secret_ops.generate_keys(secret_num, num_keys, constants.NUM_SLOPE_DIGITS)
     
 def print_output(keys):
-    print("\nResult:")
+    print("\nSuccess!")
     for index, key in enumerate(keys, start = 1):
         print("Key #" + str(index) + ": " + key)
     

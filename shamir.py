@@ -11,7 +11,7 @@ OPTIONS = [
 "Decrypt a message",
 "Encrypt a file",
 "Decrypt a file",
-"Modify an encrypted file"
+"Encrypt a file with existing keys"
 ]
 
 def main():
