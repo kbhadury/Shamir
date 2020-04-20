@@ -44,4 +44,3 @@ def get_menu_str(options, hlength):
         menu_str += row_str + '\n'
         
     return menu_str
-    

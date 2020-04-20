@@ -1,3 +1,10 @@
+import data_ops
+
+def xor_file(in_file, seed, out_file):
+    in_data = read_binary_file_data(in_file)
+    out_data = data_ops.rand_xor_bytes(in_data, seed)
+    write_binary_file_data(out_file, out_data)
+
 def read_binary_file_data(filename):
     fp = open(filename, 'rb')
     size = get_file_size(fp)

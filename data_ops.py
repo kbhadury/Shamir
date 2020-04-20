@@ -1,7 +1,8 @@
 import base64
+import random
 import re
 
-# ***** String to number ***** #
+# ***** Strings ***** #
 def str_to_num(string):
     number = 0
     for char in string:
@@ -23,6 +24,12 @@ def num_to_str(num):
         
     return string
     
+def extract_x_y(coord_pair):
+    coords = coord_pair.split(',')
+    if len(coords) != 2:
+        raise ValueError
+    return (int(coords[0]), int(coords[1]))
+    
 # ***** Base64 ***** #
 def base64_encode(ascii_str):
     input_bytes = ascii_str.encode()
@@ -38,3 +45,15 @@ def is_base64(string):
     pattern = "\A[a-zA-Z0-9+/=]+\Z"
     result = re.match(pattern, string)
     return (result is not None)
+    
+# ***** Bytes ***** #
+def rand_xor_bytes(data, seed):
+    result = bytearray(len(data))
+    random.seed(seed)
+    
+    for index, byte in enumerate(data):
+        xor_val = random.randint(0, 255)
+        new_byte = byte ^ xor_val
+        result[index] = new_byte
+        
+    return result

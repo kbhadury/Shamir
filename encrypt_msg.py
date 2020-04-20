@@ -1,9 +1,7 @@
 import data_ops
 import constants
+import secret_ops
 import user_input_manager as uim
-
-import secrets
-import string
 
 def main():
     print_instructions()
@@ -12,7 +10,7 @@ def main():
     print_output(keys)
     
 def print_instructions():
-    print(constants.ENCRYPTION_INSTRUCTIONS)
+    print(constants.ENCRYPT_MSG_INSTRUCTIONS)
     
 def get_input():
     plaintext = uim.get_printable_ascii_string("Enter the secret to encode (printable ASCII characters only): ")
@@ -20,17 +18,8 @@ def get_input():
     return (plaintext, num_keys)
     
 def generate_keys(plaintext, num_keys):
-    secret_number = data_ops.str_to_num(plaintext)        
-    slope = get_rand_num(constants.NUM_SLOPE_DIGITS)
-    
-    keys = []
-    for i in range(num_keys):
-        x_pos = i + 1
-        key_val = secret_number + slope*x_pos
-        key = str(x_pos) + ',' + str(key_val)
-        keys.append(data_ops.base64_encode(key))
-        
-    return keys
+    secret_num = data_ops.str_to_num(plaintext) 
+    return secret_ops.generate_keys(secret_num, num_keys, constants.NUM_SLOPE_DIGITS)
     
 def print_output(keys):
     print("\nResult:")
@@ -38,8 +27,3 @@ def print_output(keys):
         print("Key #" + str(index) + ": " + key)
     
     print(constants.ENCRYPTION_FOOTNOTE)
-    
-def get_rand_num(num_digits):
-    num_str = ''.join(secrets.choice(string.digits) for i in range(num_digits))
-    return int(num_str)
-    

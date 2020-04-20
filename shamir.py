@@ -15,7 +15,9 @@ OPTIONS = [
 ]
 
 def main():
+    print_menu()
     user_choice = get_choice()
+    
     if user_choice == 0:
         exit()
     elif user_choice == 1:
@@ -30,11 +32,13 @@ def main():
         pass
     else:
         exit()
-    
-def get_choice():
+
+def print_menu():
     print(constants.MAIN_MENU_HEADER)
     print(uim.get_menu_str(OPTIONS, 40))
     print(constants.MAIN_MENU_FOOTER)
+    
+def get_choice():
     return uim.get_int_choice_from(range(len(OPTIONS)), "Your choice: ")
     
 main()
