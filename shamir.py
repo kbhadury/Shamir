@@ -11,7 +11,7 @@ OPTIONS = [
 "Decrypt a message",
 "Encrypt a file",
 "Decrypt a file",
-"Encrypt a file with existing keys"
+"Encrypt a file using existing keys"
 ]
 
 def main():
@@ -29,7 +29,7 @@ def main():
     elif user_choice == 4:
         decrypt_file.main()
     elif user_choice == 5:
-        pass
+        decrypt_file.main(True)
     else:
         exit()
 

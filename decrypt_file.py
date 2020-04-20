@@ -3,7 +3,11 @@ import file_ops
 import secret_ops
 import user_input_manager as uim
 
-def main():
+reencrypt = False
+
+def main(renc = False):
+    global reencrypt
+    reencrypt = renc
     print_instructions()
     key_1, key_2 = get_key_input()
     secret_seed = get_seed(key_1, key_2)
@@ -12,7 +16,10 @@ def main():
     print_output(out_file)
     
 def print_instructions():
-    print(constants.DECRYPT_FILE_INSTRUCTIONS)
+    if reencrypt == True:
+        print(constants.REENCRYPT_FILE_INSTRUCTIONS)
+    else:
+        print(constants.DECRYPT_FILE_INSTRUCTIONS)
     
 def get_key_input():        
     key_1 = uim.get_base64_input("Enter the first key: ")
@@ -26,7 +33,10 @@ def get_seed(key_1, key_2):
         error_and_quit()
     
 def get_file_input():
-    in_file = uim.get_printable_ascii_string("Enter the name of the file to decrypt (i.e. input.txt): ")
+    action = "decrypt"
+    if reencrypt == True:
+        action = "encrypt"
+    in_file = uim.get_printable_ascii_string("Enter the name of the file to " + action + " (i.e. input.txt): ")
     out_file = uim.get_printable_ascii_string("Enter a name for the file to save the results to (i.e. output.txt): ")
     return (in_file, out_file)
     
