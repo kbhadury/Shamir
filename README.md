@@ -15,6 +15,4 @@ Obviously, if you have a really REALLY important secret then you should NOT use 
 ## Usage
 This program requires Python 3.
 
-To encrypt a message, run `python encrypt.py` from the command line and follow the prompts.
-
-To decrypt a message, run `python decrypt.py` from the command line and follow the prompts.
+Run `python shamir.py` from the command line and follow the prompts.
