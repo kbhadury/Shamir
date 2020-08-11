@@ -25,6 +25,8 @@ This implementation only supports polynomials of degree 1 (i.e. straight lines) 
 
 To retrieve the secret number, two keys must be provided.  The coordinate pairs (x1, y1) and (x2,y2) are extracted and then we use `(y2-y1)/(x2-x1)` to find the slope of the line, and then we solve for `b = y1-mx1` to find the y-intercept, which is our secret number.
 
+For a visual explanation, check out [this great video](https://www.youtube.com/watch?v=iFY5SyY3IMQ) by Art of the Problem.
+
 ### Encoding a message
 To turn a message into a number, the ASCII values of each character in the message are combined into one long bit string.  For example, let's encode "hello".  In ASCII (using hex values), `h = 0x68`, `e = 0x65`, `l = 0x6C`, and `o = 0x6F`, so they become the number `0x68656C6C6F`, which represents 448,378,203,247.  Thank goodness Python is able to handle arbitrarily large numbers, because these numbers get big pretty quickly.  However, this huge number is reflected in the key length, so encrypting a long note would result in ginormous keys, which isn't very user-friendly.  This is why there's a separate method for encrypting a file.
 
